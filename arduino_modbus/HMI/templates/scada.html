@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Talos Pumpjack SCADAGauges</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="480" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#2f434e" />
+    <meta http-equiv="cleartype" content="on" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}" />
+    <style>
+      .example {
+        overflow: auto;
+        padding: 10px;
+        box-sizing: border-box;
+        clear: both;
+      }
+      .example > .code, .example > .display {
+        box-sizing: border-box;
+        padding: 10px;
+      }
+      .example > .code {
+      }
+      .example > .display {
+        text-align: center;
+        overflow: auto;
+        padding: 0px 0;
+        overflow: hidden;
+      }
+      .example > .display {
+      }
+
+      @media only screen and (min-device-width: 768px) {
+        .example > .code {
+          width: 65%;
+        }
+        .example > .code {
+          float: left;
+        }
+        .example > .display {
+          display: inline-block;
+          padding: 10px;
+        }
+      }
+    </style>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='highlight.pack.js')}}"> </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h2>Talos Pumpjack SCADA</h2>
+    <h4>SCADA HMI - Motor Speed</h4>
+    <p>Connected to:</p>
+    <p> {{ VendorName }} - {{ ProductCode }} ver. {{ MajorMinorRevision }}</p>
+
+    <div class="example">
+      <div class="display">
+        <div id="gauge2" class="gauge-container two"></div>
+        <div class="button">
+          <img src="{{ url_for('static', filename='iconfinder_arrow-up-01_186407.svg')}}" width="100"
+               onclick="javascript:up()"
+               onmouseout="this.src='{{ url_for('static', filename='iconfinder_arrow-up-01_186407.svg')}}';"
+               onmouseover="this.src='{{ url_for('static', filename='iconfinder_arrow-up-01_186407-green.svg')}}';" />
+
+          <img width="100"
+               src="{{ url_for('static', filename='iconfinder_arrow-down-01_186411.svg')}}"
+               onclick="javascript:down()"
+               onmouseout="this.src='{{ url_for('static', filename='iconfinder_arrow-down-01_186411.svg')}}';"
+               onmouseover="this.src='{{ url_for('static', filename='iconfinder_arrow-down-01_186411-green.svg')}}';" />
+        </div>
+        <div class="shutdown">
+          <img width="100"
+               src="{{ url_for('static', filename='shutdown.svg')}}"
+               onmouseover="this.width=110;"
+               onmouseout="this.width=100;"
+               onclick="javascript:shutdown()" />
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='gauge.js')}}"> </script>
+    <script>
+
+      function up()
+      {
+        $.ajax({
+          type:"get",
+          url:"up",
+        });
+      }
+
+      function down()
+      {
+        $.ajax({
+          type:"get",
+          url:"down",
+        });
+      }
+
+      function shutdown()
+      {
+        $.ajax({
+          type:"get",
+          url:"shutdown",
+        });
+      }
+    </script>
+    <script>
+
+      var pad = function(tar) {}
+
+      var gauge2 = Gauge(
+        document.getElementById("gauge2"),
+		    {
+          min: 0,
+          max: 100,
+          dialStartAngle: 180,
+          dialEndAngle: 0,
+          value: 50,
+          viewBox: "0 0 100 57",
+          color: function(value) {
+            if(value < 50) {
+              return "#5ee432";
+            }else if(value < 70) {
+              return "#fffa50";
+            }else if(value < 80) {
+              return "#f7aa38";
+            }else {
+              return "#ef4655";
+            }
+          }
+        }
+      );
+
+        setInterval(function()
+        {
+          $.ajax({
+            type:"get",
+            url:"value",
+            datatype:"text",
+            success:function(data)
+            {
+              var value=data;
+              gauge2.setValueAnimated(value, 3);
+
+            }
+          });
+        }, 2000);
+    </script>
+  </body>
+</html>
