@@ -7,7 +7,7 @@ This repository contains all the materials to create your own oil pumpjack. The 
 ## 3-D print models
 The repository /stl contains the .stl objects. You can 3-D print these object to create the oil pumpjack
 
-![3-D Model](https://raw.githubusercontent.com/Cisco-Talos/oil-pumpjack/Pictures/image001.png)
+![3-D Model](https://github.com/Cisco-Talos/oil-pumpjack/blob/master/Pictures/image001.png)
 
 * Object 1 is the pump.
 * Object 2 is the motor, which activates the pump.
@@ -15,7 +15,7 @@ The repository /stl contains the .stl objects. You can 3-D print these object to
 
 ## Arduino Schematic
 
-![Arduino Schematic](https://raw.githubusercontent.com/Cisco-Talos/oil-pumpjack/Pictures/image002.jpg)
+![Arduino Schematic](https://github.com/Cisco-Talos/oil-pumpjack/blob/master/Pictures/image002.jpg)
 
 ## Modbus over TCP Version
 
