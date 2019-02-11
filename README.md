@@ -2,7 +2,7 @@
 
 This repository contains all the materials to create your own oil pumpjack. The purpose of this project is to provide a safe learning environment. The current version supports Modbus over TCP and EtherNet/IP protocol. For more details and to see how to build it, please refer to our [publication](https://blog.talosintelligence.com/2019/02/oil-pumpjack.html).
 
-![Oil pumpjack](https://raw.githubusercontent.com/Cisco-Talos/oil-pumpjack/Pictures/pump.gif)
+![Oil pumpjack](https://github.com/Cisco-Talos/oil-pumpjack/blob/master/Pictures/pump.gif)
 
 ## 3-D print models
 The repository /stl contains the .stl objects. You can 3-D print these object to create the oil pumpjack
